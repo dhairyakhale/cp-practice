@@ -28,24 +28,43 @@ void func()
     string s;
     cin >> s;
 
-    int repcount = 0;
+    if (s.size() & 1)
+    {
+        cout << "no" << endl;
+        return;
+    }
+
+    int repcount = 0, rrep = 0, grep = 0;
+
     if (s.size() > 2 && s[0] == s[s.size() - 1])
+    {
         repcount++;
+        if (s[0] == 'R')
+            rrep++;
+        else
+            grep++;
+    }
 
     for (int i = 1; i < s.size(); i++)
     {
         if (s[i] == s[i - 1])
+        {
             repcount++;
+            if (s[i] == 'R')
+                rrep++;
+            else
+                grep++;
+        }
         if (repcount > 2)
         {
             cout << "no" << endl;
             return;
         }
     }
-    if (repcount == 1)
-        cout << "no" << endl;
-    else
+    if (repcount == 0 || (rrep == 1 && grep == 1))
         cout << "yes" << endl;
+    else
+        cout << "no" << endl;
 }
 
 int main()
